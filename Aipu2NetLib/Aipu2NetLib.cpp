@@ -167,6 +167,7 @@ void AipuNet::SetMotionOptimization(System::Int32 motion) {
 	implementAipu->SetMotionOptimization(motion);
 }
 
+
 void AipuNet::StatePlay() {
 	implementAipu->StatePlay();
 }
