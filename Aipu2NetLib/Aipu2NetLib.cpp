@@ -15,93 +15,44 @@ AipuNet::~AipuNet() {
 	delete implementAipu;
 }
 
-void AipuNet::LoadConfiguration(System::String ^ fileString) {
 
-	pin_ptr<const WCHAR> fileConfig = PtrToStringChars(fileString);
-	implementAipu->LoadConfiguration(fileConfig);
 
+void AipuNet::SetChannel(System::Int32 value) {
+	implementAipu->SetChannel(value);
+}
+
+void AipuNet::ConnectDatabase() {
+	implementAipu->ConnectDatabase();
 }
 
 void AipuNet::InitLibrary() {
 	implementAipu->InitLibrary();
 }
 
-void AipuNet::SetIsRegister(System::Boolean option) {
-	if (option.Equals(true))
-	{
-		implementAipu->SetIsRegister(true);
-	}
-	else {
-		implementAipu->SetIsRegister(false);
-	}
-
+void AipuNet::LoadConfiguration(System::Int32 option) {
+	implementAipu->LoadConfiguration(option);
 }
 
-void AipuNet::SetFileVideo(System::String ^ file) {
-	pin_ptr<const WCHAR> fileConfig = PtrToStringChars(file);
-	implementAipu->SetFileVideo(fileConfig);
+void AipuNet::InitWindowMain(System::Int32 option) {
+	implementAipu->InitWindowMain(option);
 }
 
-void AipuNet::SetWidthFrame(System::Int32 value) {
-	implementAipu->SetWidthFrame(value);
+void AipuNet::RunVideo(System::Int32 option) {
+	implementAipu->RunVideo(option);
 }
 
-void AipuNet::SetHeightFrame(System::Int32 value) {
-	implementAipu->SetHeightFrame(value);
+void AipuNet::ReRunVideo(System::Int32 option) {
+	implementAipu->ReRunVideo(option);
 }
 
-void AipuNet::CaptureFlow(System::Int32 optionFlow) {
-	implementAipu->CaptureFlow(optionFlow);
+void AipuNet::CloseWindow() {
+	implementAipu->CloseWindow();
 }
 
-void AipuNet::SetIpCamera(System::String ^ ip) {
-	pin_ptr<const WCHAR> address = PtrToStringChars(ip);
-	implementAipu->SetIpCamera(address);
+void AipuNet::SetFinishLoop(System::Int32 option) {
+	implementAipu->SetFinishLoop(option);
 }
 
-void AipuNet::SetDeviceVideo(System::String ^ device) {
-	pin_ptr<const WCHAR> dev = PtrToStringChars(device);
-	implementAipu->SetDeviceVideo(dev);
-}
-
-void AipuNet::SetNameWindow(System::String ^ name) {
-	pin_ptr<const WCHAR> nameWindow = PtrToStringChars(name);
-	implementAipu->SetNameWindow(nameWindow);
-}
-
-void AipuNet::SetFaceConfidenceThresh(System::Int32 value) {
-	implementAipu->SetFaceConfidenceThresh(value);
-}
-
-void AipuNet::SetRefreshInterval(System::Int32 value) {
-	implementAipu->SetRefreshInterval(value);
-}
-
-void AipuNet::SetMinEyeDistance(System::Int32 minDistance) {
-	implementAipu->SetMinEyeDistance(minDistance);
-}
-
-void AipuNet::SetMaxEyeDistance(System::Int32 maxDistance) {
-	implementAipu->SetMaxEyeDistance(maxDistance);
-}
-
-void AipuNet::SetSequenceFps(System::Int32 fps) {
-	implementAipu->SetSequenceFps(fps);
-}
-
-void AipuNet::SetClient(System::Int32 value) {
-	implementAipu->SetClient(value);
-}
-
-void AipuNet::SetFlagFlow(System::Boolean flag) {
-	if (flag.Equals(true))
-	{
-		implementAipu->SetFlagFlow(true);
-	}
-	else {
-		implementAipu->SetFlagFlow(false);
-	}
-}
 
 void AipuNet::Terminate() {
 	implementAipu->Terminate();
@@ -111,13 +62,6 @@ void AipuNet::ReloadRecognitionFace() {
 	implementAipu->ReloadRecognitionFace();
 }
 
-void AipuNet::SetConfigurationDatabase() {
-	implementAipu->SetConfigurationDatabase();
-}
-
-void AipuNet::ShowWindow(System::Int32 option) {
-	implementAipu->ShowWindow(option);
-}
 
 void AipuNet::SetIsFinishLoadFiles(System::Boolean value) {
 	if (value.Equals(true))
@@ -136,48 +80,22 @@ void AipuNet::RecognitionFaceFiles(System::String ^ file, System::Int32 client) 
 	
 }
 
-void AipuNet::ResetLowScore() {
-	implementAipu->ResetLowScore();
+void AipuNet::ResetPerformance(System::Int32 option) {
+	implementAipu->ResetPerformance(option);
 }
 
-void AipuNet::ResetCountNotDetect() {
-	implementAipu->ResetCountNotDetect();
-}
-
-void AipuNet::SetDeepTrack(System::String ^ value) {
-	pin_ptr<const WCHAR> valueDeep = PtrToStringChars(value);
-	implementAipu->SetDeepTrack(valueDeep);
-}
-
-void AipuNet::ResetCountRepeatUser() {
-	implementAipu->ResetCountRepeatUser();
-}
-
-void AipuNet::InitLibraryIdentify() {
-	implementAipu->InitLibraryIdentify();
-}
-
-void AipuNet::SetTrackingMode(System::Int32 mode) {
-	implementAipu->SetTrackingMode(mode);
-}
-void AipuNet::SetTrackSpeed(System::Int32 speed) {
-	implementAipu->SetTrackSpeed(speed);
-}
-void AipuNet::SetMotionOptimization(System::Int32 motion) {
-	implementAipu->SetMotionOptimization(motion);
+void AipuNet::SavePerformance(System::Int32 option) {
+	implementAipu->SavePerformance(option);
 }
 
 
-void AipuNet::StatePlay() {
-	implementAipu->StatePlay();
+void AipuNet::StatePlay(System::Int32 option) {
+	implementAipu->StatePlay(option);
 }
 
-void AipuNet::SetFramesTotal(System::Int32 total) {
-	implementAipu->SetFramesTotal(total);
-}
 
-void AipuNet::StatePaused() {
-	implementAipu->StatePaused();
+void AipuNet::StatePaused(System::Int32 option) {
+	implementAipu->StatePaused(option);
 }
 
 UnmanagedAipu::UnmanagedAipu()
@@ -205,16 +123,50 @@ LPCWSTR UnmanagedAipu::GetUser() {
 
 }
 
+void UnmanagedAipu::ResetPerformance(int option) {
+	aipuApi->ResetPerformance(option);
+}
+
+void UnmanagedAipu::SavePerformance(int option) {
+	aipuApi->SavePerformance(option);
+}
+
+void UnmanagedAipu::SetChannel(int value) {
+	channel = value;
+}
+
+void UnmanagedAipu::ConnectDatabase() {
+	aipuApi->ConnectDatabase();
+}
+
 void UnmanagedAipu::InitLibrary() {
 	aipuApi->InitLibrary();
 }
 
-void UnmanagedAipu::LoadConfiguration(LPCWSTR nameFile) {
-	wstring lpcwstrToWstring(nameFile);
-	string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());
-	aipuApi->LoadConfiguration(wStringToString);
-
+void UnmanagedAipu::LoadConfiguration(int option) {
+	aipuApi->LoadConfiguration(option);
 }
+
+void UnmanagedAipu::ReRunVideo(int option) {
+	aipuApi->ReRunVideo(option);
+}
+
+void UnmanagedAipu::InitWindowMain(int option) {
+	aipuApi->InitWindowMain(option);
+}
+
+void UnmanagedAipu::RunVideo(int option) {
+	aipuApi->RunVideo(option);
+}
+
+void UnmanagedAipu::SetFinishLoop(int option) {
+	aipuApi->SetFinishLoop(option);
+}
+
+void UnmanagedAipu::CloseWindow() {
+	aipuApi->CloseWindow();
+}
+
 
 void UnmanagedAipu::RecognitionFaceFiles(LPCWSTR file, int client) {
 	
@@ -231,76 +183,6 @@ void UnmanagedAipu::RecognitionFaceFiles(LPCWSTR file, int client) {
 	
 }
 
-void UnmanagedAipu::SetIsRegister(bool option) {
-	aipuApi->SetIsRegister(option);
-}
-
-void UnmanagedAipu::SetFileVideo(LPCWSTR file) {
-	wstring lpcwstrToWstring(file);
-	string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());
-	aipuApi->SetFileVideo(wStringToString);
-}
-
-void UnmanagedAipu::SetDeviceVideo(LPCWSTR device) {
-	wstring lpcwstrToWstring(device);
-	string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());
-	aipuApi->SetDeviceVideo(wStringToString);
-}
-
-void UnmanagedAipu::SetNameWindow(LPCWSTR name) {
-	wstring lpcwstrToWstring(name);
-	string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());
-	aipuApi->SetNameWindow(wStringToString);
-}
-
-void UnmanagedAipu::SetWidthFrame(int value) {
-	aipuApi->SetWidthFrame(value);
-}
-
-void UnmanagedAipu::SetHeightFrame(int value) {
-	aipuApi->SetHeightFrame(value);
-}
-
-
-void UnmanagedAipu::CaptureFlow(int optionFlow) {
-	aipuApi->CaptureFlow(optionFlow);
-}
-
-
-void UnmanagedAipu::SetIpCamera(LPCWSTR ip) {
-	wstring lpcwstrToWstring(ip);
-	string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());
-	aipuApi->SetIpCamera(wStringToString);
-}
-
-void UnmanagedAipu::SetFaceConfidenceThresh(int value) {
-	aipuApi->SetFaceConfidenceThresh(value);
-}
-
-void UnmanagedAipu::SetRefreshInterval(int value) {
-	aipuApi->SetRefreshInterval(value);
-}
-
-void UnmanagedAipu::SetMinEyeDistance(int minDistance) {
-	aipuApi->SetMinEyeDistance(minDistance);
-}
-
-void UnmanagedAipu::SetMaxEyeDistance(int maxDistance) {
-	aipuApi->SetMaxEyeDistance(maxDistance);
-}
-
-void UnmanagedAipu::SetSequenceFps(int fps) {
-	aipuApi->SetSequenceFps(fps);
-}
-
-void UnmanagedAipu::SetClient(int value) {
-	aipuApi->SetClient(value);
-}
-
-void UnmanagedAipu::SetFlagFlow(bool flag) {
-	aipuApi->SetFlagFlow(flag);
-}
-
 void UnmanagedAipu::Terminate() {
 	aipuApi->Terminate();
 }
@@ -309,74 +191,19 @@ void UnmanagedAipu::ReloadRecognitionFace() {
 	aipuApi->ReloadRecognitionFace();
 }
 
-void UnmanagedAipu::SetConfigurationDatabase() {
-	aipuApi->SetConfigurationDatabase();
-}
-
-void UnmanagedAipu::ShowWindow(int option) {
-	aipuApi->ShowWindow(option);
-}
-
 void UnmanagedAipu::SetIsFinishLoadFiles(bool value) {
-	aipuApi->SetIsFinishLoadFiles(value);
+	aipuApi->SetIsFinishLoadFiles(channel, value);
 }
 
 bool UnmanagedAipu::GetIsFinishLoadFiles() {
-	return aipuApi->GetIsFinishLoadFiles();
+	return aipuApi->GetIsFinishLoadFiles(channel);
 }
 
-void UnmanagedAipu::ResetLowScore() {
-	aipuApi->ResetLowScore();
+
+void UnmanagedAipu::StatePlay(int option) {
+	aipuApi->StatePlay(option);
 }
 
-int UnmanagedAipu::GetCountLowScore() {
-	return aipuApi->GetCountLowScore();
-}
-
-void UnmanagedAipu::ResetCountNotDetect() {
-	aipuApi->ResetCountNotDetect();
-}
-
-int UnmanagedAipu::GetCountNotDetect() {
-	return aipuApi->GetCountNotDetect();
-}
-
-void UnmanagedAipu::SetDeepTrack(LPCWSTR value) {
-	wstring lpcwstrToWstring(value);
-	string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());
-	aipuApi->SetDeepTrack(wStringToString);
-}
-
-void UnmanagedAipu::ResetCountRepeatUser() {
-	aipuApi->ResetCountRepeatUser();
-}
-
-int UnmanagedAipu::GetCountRepeatUser() {
-	return aipuApi->GetCountRepeatUser();
-}
-
-void UnmanagedAipu::InitLibraryIdentify() {
-	aipuApi->InitLibraryIdentify();
-}
-
-void UnmanagedAipu::SetTrackingMode(int mode) {
-	aipuApi->SetTrackingMode(mode);
-}
-void UnmanagedAipu::SetTrackSpeed(int speed) {
-	aipuApi->SetTrackSpeed(speed);
-}
-void UnmanagedAipu::SetMotionOptimization(int motion) {
-	aipuApi->SetMotionOptimization(motion);
-}
-
-void UnmanagedAipu::StatePlay() {
-	aipuApi->StatePlay();
-}
-
-void UnmanagedAipu::StatePaused() {
-	aipuApi->StatePaused();
-}
-
-void UnmanagedAipu::SetFramesTotal(unsigned long int total) {
-	aipuApi->SetFramesTotal(total);
+void UnmanagedAipu::StatePaused(int option) {
+	aipuApi->StatePaused(option);
 }
