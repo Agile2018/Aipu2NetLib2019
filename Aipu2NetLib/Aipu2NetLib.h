@@ -25,6 +25,7 @@ namespace Aipu2NetLib {
 		void LoadConfiguration(int option);
 		void InitWindowMain(int option);
 		void RunVideo(int option);
+		void LoadConfigurationPipe(int pipeline);
 		void ReRunVideo(int option);
 		void CloseWindow();
 		
@@ -92,7 +93,7 @@ namespace Aipu2NetLib {
 		void SetChannel(System::Int32 value);
 		void ResetPerformance(System::Int32 option);
 		void SavePerformance(System::Int32 option);
-		
+		void LoadConfigurationPipe(System::Int32 pipeline);
 	protected:
 		!AipuNet() {
 			delete implementAipu;

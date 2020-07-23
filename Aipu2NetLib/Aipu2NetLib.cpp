@@ -98,6 +98,10 @@ void AipuNet::StatePaused(System::Int32 option) {
 	implementAipu->StatePaused(option);
 }
 
+void AipuNet::LoadConfigurationPipe(System::Int32 pipeline) {
+	implementAipu->LoadConfigurationPipe(pipeline);
+}
+
 UnmanagedAipu::UnmanagedAipu()
 {
 	aipuApi = new AipuAPI();
@@ -206,4 +210,8 @@ void UnmanagedAipu::StatePlay(int option) {
 
 void UnmanagedAipu::StatePaused(int option) {
 	aipuApi->StatePaused(option);
+}
+
+void UnmanagedAipu::LoadConfigurationPipe(int pipeline) {
+	aipuApi->LoadConfigurationPipe(pipeline);
 }
