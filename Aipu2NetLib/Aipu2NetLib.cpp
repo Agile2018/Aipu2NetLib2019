@@ -75,8 +75,11 @@ void AipuNet::SetIsFinishLoadFiles(System::Boolean value) {
 }
 
 void AipuNet::RecognitionFaceFiles(System::String ^ file, System::Int32 client) {
-	pin_ptr<const WCHAR> fileFace = PtrToStringChars(file);
-	implementAipu->RecognitionFaceFiles(fileFace, client);
+	//pin_ptr<const WCHAR> fileFace = PtrToStringChars(file);
+
+	std::string unmanagedFile = msclr::interop::marshal_as<std::string>(file);
+
+	implementAipu->RecognitionFaceFiles(unmanagedFile, client);
 	
 }
 
@@ -100,6 +103,43 @@ void AipuNet::StatePaused(System::Int32 option) {
 
 void AipuNet::LoadConfigurationPipe(System::Int32 pipeline) {
 	implementAipu->LoadConfigurationPipe(pipeline);
+}
+
+void AipuNet::AddCollectionOfImages(System::String^ folder, System::Int32  client,
+	System::Int32  doing) {
+	std::string unmanagedFolder = msclr::interop::marshal_as<std::string>(folder);
+
+
+	//pin_ptr<const WCHAR> folderFace = PtrToStringChars(folder);
+	implementAipu->AddCollectionOfImages(unmanagedFolder, client, doing);
+}
+
+void AipuNet::SetTaskIdentify(System::Int32 value, System::Int32 option) {
+	implementAipu->SetTaskIdentify(value, option);
+}
+
+void AipuNet::ResetEnrollVideo(System::Int32 option) {
+	implementAipu->ResetEnrollVideo(option);
+}
+
+void AipuNet::SetColourTextFrameOne(System::Single red,
+	System::Single green, System::Single blue) {
+	implementAipu->SetColourTextFrameOne(red, green, blue);
+}
+
+void AipuNet::SetColourTextFrameTwo(System::Single red,
+	System::Single green, System::Single blue) {
+	implementAipu->SetColourTextFrameTwo(red, green, blue);
+}
+
+void AipuNet::SetColourTextFrameThree(System::Single red,
+	System::Single green, System::Single blue) {
+	implementAipu->SetColourTextFrameThree(red, green, blue);
+}
+
+void AipuNet::SetColourTextFrameFour(System::Single red,
+	System::Single green, System::Single blue) {
+	implementAipu->SetColourTextFrameFour(red, green, blue);
 }
 
 UnmanagedAipu::UnmanagedAipu()
@@ -172,13 +212,14 @@ void UnmanagedAipu::CloseWindow() {
 }
 
 
-void UnmanagedAipu::RecognitionFaceFiles(LPCWSTR file, int client) {
+void UnmanagedAipu::RecognitionFaceFiles(string file, int client) {
 	
-	wstring lpcwstrToWstring(file);
-	string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());	
+	//wstring lpcwstrToWstring(file);
+
+	//string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());	
 	try
 	{
-		aipuApi->RecognitionFaceFiles(wStringToString, client);
+		aipuApi->RecognitionFaceFiles(file, client);
 	}
 	catch (const std::exception& ex)
 	{
@@ -214,4 +255,42 @@ void UnmanagedAipu::StatePaused(int option) {
 
 void UnmanagedAipu::LoadConfigurationPipe(int pipeline) {
 	aipuApi->LoadConfigurationPipe(pipeline);
+}
+
+void UnmanagedAipu::AddCollectionOfImages(string folder, int client, int doing) {
+	//wstring lpcwstrToWstring(folder);
+	//string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());
+	try
+	{		
+		aipuApi->AddCollectionOfImages(folder, client, doing);
+	}
+	catch (const std::exception& ex)
+	{
+		printf(ex.what());
+	}
+	
+}
+
+void UnmanagedAipu::SetTaskIdentify(int value, int option) {
+	aipuApi->SetTaskIdentify(value, option);
+}
+
+void UnmanagedAipu::ResetEnrollVideo(int option) {
+	aipuApi->ResetEnrollVideo(option);
+}
+
+void UnmanagedAipu::SetColourTextFrameOne(float red, float green, float blue) {
+	aipuApi->SetColourTextFrameOne(red, green, blue);
+}
+
+void UnmanagedAipu::SetColourTextFrameTwo(float red, float green, float blue) {
+	aipuApi->SetColourTextFrameTwo(red, green, blue);
+}
+
+void UnmanagedAipu::SetColourTextFrameThree(float red, float green, float blue) {
+	aipuApi->SetColourTextFrameThree(red, green, blue);
+}
+
+void UnmanagedAipu::SetColourTextFrameFour(float red, float green, float blue) {
+	aipuApi->SetColourTextFrameFour(red, green, blue);
 }
