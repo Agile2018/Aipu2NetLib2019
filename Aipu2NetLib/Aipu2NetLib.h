@@ -35,7 +35,7 @@ namespace Aipu2NetLib {
 		
 		void SetIsFinishLoadFiles(bool value);
 		bool GetIsFinishLoadFiles();
-		void RecognitionFaceFiles(string file, int client);
+		void RecognitionFaceFiles(string file, int client, int task);
 		
 		void StatePlay(int option);
 		void StatePaused(int option);
@@ -50,6 +50,7 @@ namespace Aipu2NetLib {
 		void SetColourTextFrameTwo(float red, float green, float blue);
 		void SetColourTextFrameThree(float red, float green, float blue);
 		void SetColourTextFrameFour(float red, float green, float blue);
+		void SetNumberPipelines(int value);
 	private:
 		int channel;
 	};
@@ -93,7 +94,7 @@ namespace Aipu2NetLib {
 		void ReloadRecognitionFace();
 		
 		void SetIsFinishLoadFiles(System::Boolean value);
-		void RecognitionFaceFiles(System::String ^ file, System::Int32 client);
+		void RecognitionFaceFiles(System::String ^ file, System::Int32 client, System::Int32 task);
 		void AddCollectionOfImages(System::String^ folder, System::Int32  client,
 			System::Int32  doing);
 		void StatePlay(System::Int32 option);
@@ -108,6 +109,7 @@ namespace Aipu2NetLib {
 		void SetColourTextFrameTwo(System::Single red, System::Single green, System::Single blue);
 		void SetColourTextFrameThree(System::Single red, System::Single green, System::Single blue);
 		void SetColourTextFrameFour(System::Single red, System::Single green, System::Single blue);
+		void SetNumberPipelines(System::Int32 value);
 	protected:
 		!AipuNet() {
 			delete implementAipu;

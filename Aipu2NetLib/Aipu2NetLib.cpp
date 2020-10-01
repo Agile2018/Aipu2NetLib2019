@@ -74,12 +74,12 @@ void AipuNet::SetIsFinishLoadFiles(System::Boolean value) {
 	
 }
 
-void AipuNet::RecognitionFaceFiles(System::String ^ file, System::Int32 client) {
+void AipuNet::RecognitionFaceFiles(System::String ^ file, System::Int32 client, System::Int32 task) {
 	//pin_ptr<const WCHAR> fileFace = PtrToStringChars(file);
 
 	std::string unmanagedFile = msclr::interop::marshal_as<std::string>(file);
 
-	implementAipu->RecognitionFaceFiles(unmanagedFile, client);
+	implementAipu->RecognitionFaceFiles(unmanagedFile, client, task);
 	
 }
 
@@ -140,6 +140,10 @@ void AipuNet::SetColourTextFrameThree(System::Single red,
 void AipuNet::SetColourTextFrameFour(System::Single red,
 	System::Single green, System::Single blue) {
 	implementAipu->SetColourTextFrameFour(red, green, blue);
+}
+
+void AipuNet::SetNumberPipelines(System::Int32 value) {
+	implementAipu->SetNumberPipelines(value);
 }
 
 UnmanagedAipu::UnmanagedAipu()
@@ -212,14 +216,14 @@ void UnmanagedAipu::CloseWindow() {
 }
 
 
-void UnmanagedAipu::RecognitionFaceFiles(string file, int client) {
+void UnmanagedAipu::RecognitionFaceFiles(string file, int client, int task) {
 	
 	//wstring lpcwstrToWstring(file);
 
 	//string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());	
 	try
 	{
-		aipuApi->RecognitionFaceFiles(file, client);
+		aipuApi->RecognitionFaceFiles(file, client, task);
 	}
 	catch (const std::exception& ex)
 	{
@@ -293,4 +297,8 @@ void UnmanagedAipu::SetColourTextFrameThree(float red, float green, float blue) 
 
 void UnmanagedAipu::SetColourTextFrameFour(float red, float green, float blue) {
 	aipuApi->SetColourTextFrameFour(red, green, blue);
+}
+
+void UnmanagedAipu::SetNumberPipelines(int value) {
+	aipuApi->SetNumberPipelines(value);
 }
