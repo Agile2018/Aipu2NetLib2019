@@ -83,13 +83,13 @@ void AipuNet::RecognitionFaceFiles(System::String ^ file, System::Int32 client, 
 	
 }
 
-void AipuNet::ResetPerformance(System::Int32 option) {
-	implementAipu->ResetPerformance(option);
-}
-
-void AipuNet::SavePerformance(System::Int32 option) {
-	implementAipu->SavePerformance(option);
-}
+//void AipuNet::ResetPerformance(System::Int32 option) {
+//	implementAipu->ResetPerformance(option);
+//}
+//
+//void AipuNet::SavePerformance(System::Int32 option) {
+//	implementAipu->SavePerformance(option);
+//}
 
 
 void AipuNet::StatePlay(System::Int32 option) {
@@ -118,8 +118,8 @@ void AipuNet::SetTaskIdentify(System::Int32 value, System::Int32 option) {
 	implementAipu->SetTaskIdentify(value, option);
 }
 
-void AipuNet::ResetEnrollVideo(System::Int32 option) {
-	implementAipu->ResetEnrollVideo(option);
+void AipuNet::ResetEnrollVideo(System::Int32 option, System::Int32 value) {
+	implementAipu->ResetEnrollVideo(option, value);
 }
 
 void AipuNet::SetColourTextFrameOne(System::Single red,
@@ -144,6 +144,10 @@ void AipuNet::SetColourTextFrameFour(System::Single red,
 
 void AipuNet::SetNumberPipelines(System::Int32 value) {
 	implementAipu->SetNumberPipelines(value);
+}
+
+void AipuNet::AddUserEnrollVideo(System::Int32 channel) {
+	implementAipu->AddUserEnrollVideo(channel);
 }
 
 UnmanagedAipu::UnmanagedAipu()
@@ -171,13 +175,13 @@ LPCWSTR UnmanagedAipu::GetUser() {
 
 }
 
-void UnmanagedAipu::ResetPerformance(int option) {
-	aipuApi->ResetPerformance(option);
-}
-
-void UnmanagedAipu::SavePerformance(int option) {
-	aipuApi->SavePerformance(option);
-}
+//void UnmanagedAipu::ResetPerformance(int option) {
+//	aipuApi->ResetPerformance(option);
+//}
+//
+//void UnmanagedAipu::SavePerformance(int option) {
+//	aipuApi->SavePerformance(option);
+//}
 
 void UnmanagedAipu::SetChannel(int value) {
 	channel = value;
@@ -279,8 +283,8 @@ void UnmanagedAipu::SetTaskIdentify(int value, int option) {
 	aipuApi->SetTaskIdentify(value, option);
 }
 
-void UnmanagedAipu::ResetEnrollVideo(int option) {
-	aipuApi->ResetEnrollVideo(option);
+void UnmanagedAipu::ResetEnrollVideo(int option, int value) {
+	aipuApi->ResetEnrollVideo(option, value);
 }
 
 void UnmanagedAipu::SetColourTextFrameOne(float red, float green, float blue) {
@@ -301,4 +305,8 @@ void UnmanagedAipu::SetColourTextFrameFour(float red, float green, float blue) {
 
 void UnmanagedAipu::SetNumberPipelines(int value) {
 	aipuApi->SetNumberPipelines(value);
+}
+
+void UnmanagedAipu::AddUserEnrollVideo(int channel) {
+	aipuApi->AddUserEnrollVideo(channel);
 }
