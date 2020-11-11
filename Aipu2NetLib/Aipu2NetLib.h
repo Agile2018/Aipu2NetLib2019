@@ -21,6 +21,7 @@ namespace Aipu2NetLib {
 		~UnmanagedAipu();
 		LPCWSTR GetError();
 		LPCWSTR GetUser();
+		LPCWSTR GetTemplateJSON();
 		void ConnectDatabase();
 		void InitLibrary();
 		void LoadConfiguration(int option);
@@ -41,8 +42,7 @@ namespace Aipu2NetLib {
 		void StatePaused(int option);
 		void SetFinishLoop(int option);
 		void SetChannel(int value);
-		//void ResetPerformance(int option);
-		//void SavePerformance(int option);
+		
 		void AddCollectionOfImages(string folder, int client, int doing);
 		void SetTaskIdentify(int value, int option);
 		void ResetEnrollVideo(int option, int value);
@@ -51,7 +51,16 @@ namespace Aipu2NetLib {
 		void SetColourTextFrameThree(float red, float green, float blue);
 		void SetColourTextFrameFour(float red, float green, float blue);
 		void SetNumberPipelines(int value);
-		void AddUserEnrollVideo(int channel);
+		void AddUserEnrollVideo(int channel);		
+		void CloseConnectionIdentification(int channel);
+		void LoadConnectionIdentification(int channel);
+		int GetTaskIdentify();
+		void DownConfigurationModel(int channel);
+		void LoadConfigurationModel(int channel);
+		void LoadConfigurationIdentify(int channel); // CloseConnectionIdentification 
+		void LoadConfigurationTracking(int channel); // SetFinishLoop
+		bool GetIsLoadConfiguration();
+		
 	private:
 		int channel;
 	};
@@ -80,6 +89,23 @@ namespace Aipu2NetLib {
 			}
 		}
 
+		property System::String ^ GetTemplateJSON {
+			System::String ^ get() {
+				return gcnew System::String(implementAipu->GetTemplateJSON());
+			}
+		}
+
+		property System::Int16 GetTaskIdentify {
+			System::Int16 get() {
+				return implementAipu->GetTaskIdentify();
+			}
+		}
+
+		property System::Boolean GetIsLoadConfiguration {
+			System::Boolean get() {
+				return implementAipu->GetIsLoadConfiguration();
+			}
+		}
 		
 
 		void ConnectDatabase();
@@ -101,8 +127,7 @@ namespace Aipu2NetLib {
 		void StatePlay(System::Int32 option);
 		void StatePaused(System::Int32 option);
 		void SetChannel(System::Int32 value);
-		//void ResetPerformance(System::Int32 option);
-		//void SavePerformance(System::Int32 option);
+		
 		void LoadConfigurationPipe(System::Int32 pipeline);
 		void SetTaskIdentify(System::Int32 value, System::Int32 option);
 		void ResetEnrollVideo(System::Int32 option, System::Int32 value);
@@ -111,7 +136,13 @@ namespace Aipu2NetLib {
 		void SetColourTextFrameThree(System::Single red, System::Single green, System::Single blue);
 		void SetColourTextFrameFour(System::Single red, System::Single green, System::Single blue);
 		void SetNumberPipelines(System::Int32 value);
-		void AddUserEnrollVideo(System::Int32 channel);
+		void AddUserEnrollVideo(System::Int32 channel);		
+		void CloseConnectionIdentification(System::Int32 channel);
+		void LoadConnectionIdentification(System::Int32 channel);
+		void DownConfigurationModel(System::Int32 channel);
+		void LoadConfigurationModel(System::Int32 channel);
+		void LoadConfigurationIdentify(System::Int32 channel); // CloseConnectionIdentification 
+		void LoadConfigurationTracking(System::Int32 channel); // SetFinishLoop
 	protected:
 		!AipuNet() {
 			delete implementAipu;

@@ -83,15 +83,6 @@ void AipuNet::RecognitionFaceFiles(System::String ^ file, System::Int32 client, 
 	
 }
 
-//void AipuNet::ResetPerformance(System::Int32 option) {
-//	implementAipu->ResetPerformance(option);
-//}
-//
-//void AipuNet::SavePerformance(System::Int32 option) {
-//	implementAipu->SavePerformance(option);
-//}
-
-
 void AipuNet::StatePlay(System::Int32 option) {
 	implementAipu->StatePlay(option);
 }
@@ -150,6 +141,27 @@ void AipuNet::AddUserEnrollVideo(System::Int32 channel) {
 	implementAipu->AddUserEnrollVideo(channel);
 }
 
+void AipuNet::CloseConnectionIdentification(System::Int32 channel) {
+	implementAipu->CloseConnectionIdentification(channel);
+}
+
+void AipuNet::LoadConnectionIdentification(System::Int32 channel) {
+	implementAipu->LoadConnectionIdentification(channel);
+}
+
+void AipuNet::DownConfigurationModel(System::Int32 channel) {
+	implementAipu->DownConfigurationModel(channel);
+}
+void AipuNet::LoadConfigurationModel(System::Int32 channel) {
+	implementAipu->LoadConfigurationModel(channel);
+}
+void AipuNet::LoadConfigurationIdentify(System::Int32 channel) {
+	implementAipu->LoadConfigurationIdentify(channel);
+}
+void AipuNet::LoadConfigurationTracking(System::Int32 channel) {
+	implementAipu->LoadConfigurationTracking(channel);
+}
+
 UnmanagedAipu::UnmanagedAipu()
 {
 	aipuApi = new AipuAPI();
@@ -174,14 +186,6 @@ LPCWSTR UnmanagedAipu::GetUser() {
 	return resultUser;
 
 }
-
-//void UnmanagedAipu::ResetPerformance(int option) {
-//	aipuApi->ResetPerformance(option);
-//}
-//
-//void UnmanagedAipu::SavePerformance(int option) {
-//	aipuApi->SavePerformance(option);
-//}
 
 void UnmanagedAipu::SetChannel(int value) {
 	channel = value;
@@ -310,3 +314,42 @@ void UnmanagedAipu::SetNumberPipelines(int value) {
 void UnmanagedAipu::AddUserEnrollVideo(int channel) {
 	aipuApi->AddUserEnrollVideo(channel);
 }
+
+LPCWSTR UnmanagedAipu::GetTemplateJSON() {
+	string templateImage = aipuApi->GetTemplateJSON();
+	wstring wideTemplate(templateImage.begin(), templateImage.end());
+	const wchar_t* resultTemplate = wideTemplate.c_str();
+	return resultTemplate;
+}
+
+void UnmanagedAipu::CloseConnectionIdentification(int channel) {
+	aipuApi->CloseConnectionIdentification(channel);
+}
+
+void UnmanagedAipu::LoadConnectionIdentification(int channel) {
+	aipuApi->LoadConnectionIdentification(channel);
+}
+
+int UnmanagedAipu::GetTaskIdentify() {
+	return aipuApi->GetTaskIdentify(channel);
+}
+
+void UnmanagedAipu::DownConfigurationModel(int channel) {
+	aipuApi->DownConfigurationModel(channel);
+}
+
+void UnmanagedAipu::LoadConfigurationModel(int channel) {
+	aipuApi->LoadConfigurationModel(channel);
+}
+void UnmanagedAipu::LoadConfigurationIdentify(int channel) {
+	aipuApi->LoadConfigurationIdentify(channel);
+}
+
+void UnmanagedAipu::LoadConfigurationTracking(int channel) {
+	aipuApi->LoadConfigurationTracking(channel);
+}
+
+bool UnmanagedAipu::GetIsLoadConfiguration() {
+	return aipuApi->GetIsLoadConfiguration(channel);
+}
+
