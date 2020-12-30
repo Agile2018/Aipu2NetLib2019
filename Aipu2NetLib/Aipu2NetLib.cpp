@@ -33,12 +33,14 @@ void AipuNet::LoadConfiguration(System::Int32 option) {
 	implementAipu->LoadConfiguration(option);
 }
 
-void AipuNet::InitWindowMain(System::Int32 option) {
-	implementAipu->InitWindowMain(option);
+void AipuNet::InitWindowMain(System::Int32 option, System::String^ channels) {
+	std::string unmanagedChannels = msclr::interop::marshal_as<std::string>(channels);
+	implementAipu->InitWindowMain(option, unmanagedChannels);
 }
 
-void AipuNet::RunVideo(System::Int32 option) {
-	implementAipu->RunVideo(option);
+void AipuNet::RunVideo(System::Int32 option, System::String^ channels) {
+	std::string unmanagedChannels = msclr::interop::marshal_as<std::string>(channels);
+	implementAipu->RunVideo(option, unmanagedChannels);
 }
 
 void AipuNet::ReRunVideo(System::Int32 option) {
@@ -74,13 +76,19 @@ void AipuNet::SetIsFinishLoadFiles(System::Boolean value) {
 	
 }
 
-void AipuNet::RecognitionFaceFiles(System::String ^ file, System::Int32 client, System::Int32 task) {
-	//pin_ptr<const WCHAR> fileFace = PtrToStringChars(file);
-
-	std::string unmanagedFile = msclr::interop::marshal_as<std::string>(file);
-
-	implementAipu->RecognitionFaceFiles(unmanagedFile, client, task);
+void AipuNet::RecognitionFaceFiles(System::String^ nameFile,
+	System::Int32 client, System::Int32 task) {
 	
+		
+	/*std::vector<string> listFilesUnmanaged;
+
+	for each (auto str in listFiles) {
+		std::string unmanagedFile = msclr::interop::marshal_as<std::string>(str);
+		listFilesUnmanaged.push_back(unmanagedFile);
+	}*/
+
+	std::string unmanagedFile = msclr::interop::marshal_as<std::string>(nameFile);
+	implementAipu->RecognitionFaceFiles(unmanagedFile, client, task);
 }
 
 void AipuNet::StatePlay(System::Int32 option) {
@@ -113,25 +121,6 @@ void AipuNet::ResetEnrollVideo(System::Int32 option, System::Int32 value) {
 	implementAipu->ResetEnrollVideo(option, value);
 }
 
-void AipuNet::SetColourTextFrameOne(System::Single red,
-	System::Single green, System::Single blue) {
-	implementAipu->SetColourTextFrameOne(red, green, blue);
-}
-
-void AipuNet::SetColourTextFrameTwo(System::Single red,
-	System::Single green, System::Single blue) {
-	implementAipu->SetColourTextFrameTwo(red, green, blue);
-}
-
-void AipuNet::SetColourTextFrameThree(System::Single red,
-	System::Single green, System::Single blue) {
-	implementAipu->SetColourTextFrameThree(red, green, blue);
-}
-
-void AipuNet::SetColourTextFrameFour(System::Single red,
-	System::Single green, System::Single blue) {
-	implementAipu->SetColourTextFrameFour(red, green, blue);
-}
 
 void AipuNet::SetNumberPipelines(System::Int32 value) {
 	implementAipu->SetNumberPipelines(value);
@@ -161,6 +150,12 @@ void AipuNet::LoadConfigurationIdentify(System::Int32 channel) {
 void AipuNet::LoadConfigurationTracking(System::Int32 channel) {
 	implementAipu->LoadConfigurationTracking(channel);
 }
+
+void AipuNet::SetColourLabelFrame(System::Int32 indexFrame, System::Single red,
+	System::Single green, System::Single blue) {
+	implementAipu->SetColourLabelFrame(indexFrame, red, green, blue);
+}
+
 
 UnmanagedAipu::UnmanagedAipu()
 {
@@ -207,12 +202,12 @@ void UnmanagedAipu::ReRunVideo(int option) {
 	aipuApi->ReRunVideo(option);
 }
 
-void UnmanagedAipu::InitWindowMain(int option) {
-	aipuApi->InitWindowMain(option);
+void UnmanagedAipu::InitWindowMain(int option, string channels) {
+	aipuApi->InitWindowMain(option, channels);
 }
 
-void UnmanagedAipu::RunVideo(int option) {
-	aipuApi->RunVideo(option);
+void UnmanagedAipu::RunVideo(int option, string channels) {
+	aipuApi->RunVideo(option, channels);
 }
 
 void UnmanagedAipu::SetFinishLoop(int option) {
@@ -224,20 +219,13 @@ void UnmanagedAipu::CloseWindow() {
 }
 
 
-void UnmanagedAipu::RecognitionFaceFiles(string file, int client, int task) {
+void UnmanagedAipu::RecognitionFaceFiles(string nameFile, int client, int task) {
 	
 	//wstring lpcwstrToWstring(file);
 
 	//string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());	
-	try
-	{
-		aipuApi->RecognitionFaceFiles(file, client, task);
-	}
-	catch (const std::exception& ex)
-	{
-		printf(ex.what());
-	}
 	
+	aipuApi->RecognitionFaceFiles(nameFile, client, task);
 }
 
 void UnmanagedAipu::Terminate() {
@@ -291,22 +279,6 @@ void UnmanagedAipu::ResetEnrollVideo(int option, int value) {
 	aipuApi->ResetEnrollVideo(option, value);
 }
 
-void UnmanagedAipu::SetColourTextFrameOne(float red, float green, float blue) {
-	aipuApi->SetColourTextFrameOne(red, green, blue);
-}
-
-void UnmanagedAipu::SetColourTextFrameTwo(float red, float green, float blue) {
-	aipuApi->SetColourTextFrameTwo(red, green, blue);
-}
-
-void UnmanagedAipu::SetColourTextFrameThree(float red, float green, float blue) {
-	aipuApi->SetColourTextFrameThree(red, green, blue);
-}
-
-void UnmanagedAipu::SetColourTextFrameFour(float red, float green, float blue) {
-	aipuApi->SetColourTextFrameFour(red, green, blue);
-}
-
 void UnmanagedAipu::SetNumberPipelines(int value) {
 	aipuApi->SetNumberPipelines(value);
 }
@@ -351,5 +323,9 @@ void UnmanagedAipu::LoadConfigurationTracking(int channel) {
 
 bool UnmanagedAipu::GetIsLoadConfiguration() {
 	return aipuApi->GetIsLoadConfiguration(channel);
+}
+
+void UnmanagedAipu::SetColourLabelFrame(int indexFrame, float red, float green, float blue) {
+	aipuApi->SetColourLabelFrame(indexFrame, red, green, blue);
 }
 
